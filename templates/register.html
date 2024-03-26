@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Telecom Customer Management System</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h2><u> Welcome to the Telecom Customer Management System </u></h2>
+  <p><u></u></p> 
+</div>
+
+<div class="container">
+ 
+    <h2>Register New Customer</h2>
+    <form action="#" id="register-form">
+     <div class="panel-body">
+        <table class="table">
+            <tr style="border: 1px ;background-color: #f2f2f2;"> 
+             <th> <label for="name">Name:</label></th>
+             <td><input type="text" id="name" name="name" required></td> 
+           </tr>
+
+            <tr style="border: 1px ;background-color: #f2f2f2;"> 
+             <th><label for="dob">DOB:</label> </th>
+             <td> <input type="date" id="dob" name="dob" required> </td> 
+           </tr>
+
+            <tr style="border: 1px ;background-color: #f2f2f2;"> 
+             <th><label for="email">Email:</label> </th>
+             <td><input type="email" id="email" name="email" required> </td> 
+           </tr>
+            <tr style="border: 1px ;background-color: #f2f2f2;"> 
+             <th> <label for="adhar_number">Adhar Number:</label> </th>
+             <td> <input type="text" id="adhar_number" name="adhar_number" maxlength="12" required></td> 
+           </tr>
+            <tr style="border: 1px ;background-color: #f2f2f2;"> 
+             <th> <label for="registration_date">Registration Date:</label></th>
+             <td><input type="date" id="registration_date" name="registration_date" required> </td> 
+           </tr>
+          <tr style="border: 1px ;background-color: #f2f2f2;"> 
+              <th> <label for="mobile_number">Assigned Mobile Number:</label></th>
+              <td><input type="tel" id="mobile_number" name="mobile_number" maxlength="10" required></td> 
+             </tr>
+          <tr style="border: 1px ;background-color: #f2f2f2;"> 
+                 <th> <label for="plan">Choose New Plan:</label></th>
+                 <td>      <select id="plan" name="plan" required>
+                    <option value="Platinum365">Platinum365 (Cost: 499, Validity: 365, Status: Active)</option>
+                    <option value="Gold180">Gold180 (Cost: 299, Validity: 180, Status: Active)</option>
+                    <option value="Silver90">Silver90 (Cost: 199, Validity: 90, Status: Active)</option>
+                  </select>
+                   </td> 
+               </tr>
+          <tr style="border: 1px ;background-color: #f2f2f2;"> 
+                 <th> </th>
+                 <td> <button type="submit" id="register-button">Register Customer</button>
+                  </td> 
+               </tr>
+
+        </table>      
+    </form>
+</div>
+    <script>
+      // Register form submission
+      document.getElementById("register-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Create a new customer object
+        const customer = {
+          name: document.getElementById("name").value,
+          dob: document.getElementById("dob").value,
+          email: document.getElementById("email").value,
+          adhar_number: document.getElementById("adhar_number").value,
+          registration_date: document.getElementById("registration_date").value,
+          mobile_number: document.getElementById("mobile_number").value,
+          plan: {
+            name: document.getElementById("plan").value,
+            cost: 499, // Default cost based on the example above
+            validity: 365, // Default validity based on the example above
+            status: "Active"
+          }
+        };
+
+        // Send a POST request to the /register_customer endpoint
+        fetch("/register_customer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(customer)
+        })
+        .then(response => {
+          if (response.ok) {
+            alert("Customer registered successfully!");
+            // Reset the form fields
+            document.getElementById("register-form").reset();
+          } else {
+            throw new Error("Failed to register customer");
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          alert("Failed to register customer. Please try again later.");
+        });
+      });
+
+    </script>
+
+</body>
+</html>

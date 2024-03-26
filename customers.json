@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "dob": "1990-01-01",
+        "email": "john.doe@example.com",
+        "adhar_number": "123456789012",
+        "registration_date": "2022-01-01",
+        "mobile_number": "1234567890",
+        "plan": {
+            "name": "Platinum365",
+            "cost": 499,
+            "validity": 365,
+            "status": "Active"
+        }
+    },
+    {
+        "id": 2,
+        "name": "Manjunath",
+        "dob": "2024-03-01",
+        "email": "manju24j@gmail.com",
+        "adhar_number": "636363636363",
+        "registration_date": "2024-03-25",
+        "mobile_number": "7411566287",
+        "plan": {
+            "name": "Gold180",
+            "cost": 499,
+            "validity": 365,
+            "status": "Active"
+        }
+    },
+    {
+        "id": 3,
+        "name": "Manjunath",
+        "dob": "2024-02-27",
+        "email": "manju24j@gmail.com",
+        "adhar_number": "636363636363",
+        "registration_date": "2024-03-28",
+        "mobile_number": "7411566287",
+        "plan": {
+            "name": "Platinum365",
+            "cost": 499,
+            "validity": 365,
+            "status": "Active"
+        }
+    },
+    {
+        "id": 4,
+        "name": "Manjunath",
+        "dob": "2024-03-11",
+        "email": "manju24j@gmail.com",
+        "adhar_number": "636363636363",
+        "registration_date": "2024-03-25",
+        "mobile_number": "7411566287",
+        "plan": {
+            "name": "Platinum365",
+            "cost": 499,
+            "validity": 365,
+            "status": "Active"
+        }
+    }
+]

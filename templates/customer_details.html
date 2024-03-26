@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Telecom Customer Management System</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h2><u> Welcome to the Telecom Customer Management System </u></h2>
+  <p><u></u></p> 
+</div>
+  
+<div class="container">
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+                <th>Plan</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{ customers.id }}</td>
+                    <td>{{ customers.name }}</td>
+                    <td>{{ customers.email }}</td>
+                    <td>{{ customers.mobile_number }}</td>
+                    <td>{{ customers.plan }}</td>
+                    <td>
+                        <button onclick="renewPlan({{ customers.id }})">Renew</button>
+                        <button onclick="upgradeDowngradePlan({{ customers.id }})">Upgrade/Downgrade</button>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+</div>
+    <script>
+          function renewPlan(customers) {
+            const requestBody = {
+                "id": customers.id,
+                "plan": {
+                    "plan_name": "Platinum365",
+                    "plan_cost": 499,
+                    "validity_days": 365,
+                    "status": "Active"
+                }
+            };
+
+            fetch('http://localhost:5000/renew_plan', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                alert('Plan renewed successfully for customer ' + customer.id);
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Error renewing plan for customer ' + customer.id);
+            });
+        }
+
+        function upgradeDowngradePlan(index) {
+            // call the Flask API to upgrade or downgrade the plan
+            // you can pass the index of the customer as a parameter in the API call
+        }
+    </script>
+</body>
+</html>

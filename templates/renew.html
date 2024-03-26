@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telecom Customer Management System</title>
+    <script>
+        function renewPlan() {
+            const customerIdInput = document.getElementById('customer-id');
+            const customerId = customerIdInput.value;
+
+            const planSelect = document.getElementById('plan');
+            const plan = planSelect.options[planSelect.selectedIndex].value;
+
+            const requestBody = {
+                "id": customerId,
+                "plan": plan
+            };
+
+            fetch('http://localhost:5000/renew_plan', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                alert('Plan renewed successfully');
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Error renewing plan');
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Renew Plan</h2>
+
+    <label for="customer-id">Customer ID:</label>
+    <input type="number" id="customer-id" name="customer-id" required>
+
+    <label for="plan">Select Plan:</label>
+    <select id="plan" name="plan">
+        <option value="{&quot;plan_name&quot;:&quot;Platinum365&quot;,&quot;plan_cost&quot;:499,&quot;validity_days&quot;:365,&quot;status&quot;:&quot;Active&quot;}">Platinum365 - ₹ 499 - 365 Days</option>
+        <option value="{&quot;plan_name&quot;:&quot;Gold180&quot;,&quot;plan_cost&quot;:299,&quot;validity_days&quot;:180,&quot;status&quot;:&quot;Active&quot;}">Gold180 - ₹ 299 - 180 Days</option>
+        <option value="{&quot;plan_name&quot;:&quot;Silver90&quot;,&quot;plan_cost&quot;:199,&quot;validity_days&quot;:90,&quot;status&quot;:&quot;Active&quot;}">Silver90 - ₹ 199 - 90 Days</option>
+    </select>
+
+    <button type="button" onclick="renewPlan()">Renew Plan</button>
+</body>
+</html>
